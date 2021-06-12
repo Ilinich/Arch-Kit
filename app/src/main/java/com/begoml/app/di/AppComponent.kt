@@ -2,6 +2,7 @@ package com.begoml.app.di
 
 import android.content.Context
 import com.begoml.app.di.module.GsonModule
+import com.begoml.app.di.module.ProvidersModule
 import com.begoml.app.di.module.RepositoryModule
 import com.begoml.app.presentation.ArchKitApplication
 import com.begoml.app.presentation.activity.MainActivity
@@ -15,7 +16,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
         RepositoryModule::class,
-        GsonModule::class
+        GsonModule::class,
+        ProvidersModule::class
     ]
 )
 @Singleton

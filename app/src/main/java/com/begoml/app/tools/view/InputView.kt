@@ -35,8 +35,6 @@ class InputView @JvmOverloads constructor(
         private const val SPARSE_STATE_KEY = "SPARSE_STATE_KEY"
         private const val SUPER_STATE_KEY = "SUPER_STATE_KEY"
         private const val DEFAULT_INPUT_RADIUS = 25f
-        private const val BOX_STROKE_NONE = 0
-        private const val IME_OPTIONS_NM = "nm"
     }
 
     private var textFooter: TextView
@@ -112,11 +110,6 @@ class InputView @JvmOverloads constructor(
         inputEditText.hint = textHint
     }
 
-    fun isRightHeaderVisible(isVisible: Boolean) {
-        txtHeaderRight.isVisible = isVisible
-    }
-
-
     fun onClickKeyboardDoneButton(onDoneClick: () -> Unit) {
         inputEditText.setOnEditorActionListener { _, actionId, _ ->
             when (actionId) {
@@ -138,27 +131,6 @@ class InputView @JvmOverloads constructor(
                 }
             }
     }
-
-    fun setFooterClickListener(onTextFooterClick: () -> Unit) {
-        textFooter.setOnClickListener {
-            onTextFooterClick.invoke()
-        }
-    }
-
-    fun onDeleteCharListener(onDeleteButtonClick: (String) -> Unit) {
-        inputEditText.doOnTextChanged { inputText, _, before, count ->
-            if (count < before) {
-                onDeleteButtonClick(inputText.toString())
-            }
-        }
-    }
-
-    fun onCopyPasteListener(onPasteClick: (String) -> Unit) {
-        inputEditText.doAfterTextChanged {
-            onPasteClick(it.toString())
-        }
-    }
-
 
     var text: String
         get() = inputEditText.text.toString()
