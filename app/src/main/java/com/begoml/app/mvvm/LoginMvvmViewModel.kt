@@ -1,8 +1,8 @@
-package com.begoml.app.login
+package com.begoml.app.mvvm
 
 import androidx.lifecycle.ViewModel
 
-class LoginViewModel : ViewModel() {
+class LoginMvvmViewModel : ViewModel() {
 
     fun onLoginClicked(login: String, password: String) {
 
