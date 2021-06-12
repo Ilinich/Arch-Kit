@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.begoml.app.R
 import com.bumptech.glide.Glide
 
-
 fun RecyclerView.setDivider(@DrawableRes drawableRes: Int) {
     val divider = DividerItemDecoration(
         this.context,
