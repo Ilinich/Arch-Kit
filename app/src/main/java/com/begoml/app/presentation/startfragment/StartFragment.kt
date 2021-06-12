@@ -2,6 +2,7 @@ package com.begoml.app.presentation.startfragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -9,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.begoml.app.R
 import com.begoml.app.databinding.FragmentStartBinding
 import com.begoml.app.presentation.startfragment.StartFragmentViewModel.*
+import com.begoml.app.tools.navigateSafe
 import com.begoml.archkit.viewstate.collectEvent
 
 class StartFragment : Fragment(R.layout.fragment_start) {
@@ -24,13 +26,13 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         ) { event ->
             return@collectEvent when (event){
                 Event.NavigateToMvvmScreen -> {
-                    goToMvvmScreen()
+                    navigateToNextScreen(R.id.actionToLoginMvvmFragment)
                 }
                 Event.NavigateToProfileScreen -> {
-                    goToProfileScreen()
+                    navigateToNextScreen(R.id.actionToProfileFragment)
                 }
                 Event.NavigateToMviScreen -> {
-                    goToMviScreen()
+                    navigateToNextScreen(R.id.actionLoginMviFragment)
                 }
             }
         }
@@ -47,15 +49,9 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         }
     }
 
-    private fun goToMvvmScreen() {
-        findNavController().navigate(R.id.actionToLoginMvvmFragment)
-    }
-
-    private fun goToProfileScreen() {
-        findNavController().navigate(R.id.actionToProfileFragment)
-    }
-
-    private fun goToMviScreen() {
-        findNavController().navigate(R.id.actionLoginMviFragment)
+    private fun navigateToNextScreen(@IdRes screenId: Int){
+        findNavController().navigateSafe(R.id.startFragment){
+            navigate(screenId)
+        }
     }
 }

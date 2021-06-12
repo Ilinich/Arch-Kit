@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.begoml.app.R
@@ -60,4 +62,13 @@ fun ViewGroup.saveChildViewStates(): SparseArray<Parcelable> {
     val childViewStates = SparseArray<Parcelable>()
     children.forEach { child -> child.saveHierarchyState(childViewStates) }
     return childViewStates
+}
+
+fun NavController.navigateSafe(
+    @IdRes destination: Int?,
+    action: NavController.() -> Unit
+) {
+    if (this.currentDestination?.id == destination) {
+        action()
+    }
 }
