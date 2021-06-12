@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.begoml.app.startfragment.StartFragment"
+        android:name="com.begoml.app.presentation.startfragment.StartFragment"
         android:label="FragmentSettings"
         >
         <action
@@ -27,17 +27,17 @@
 
     <fragment
         android:id="@+id/loginMvvmFragment"
-        android:name="com.begoml.app.loginmvvm.LoginMvvmFragment"
+        android:name="com.begoml.app.presentation.loginmvvm.LoginMvvmFragment"
         android:label="FragmentSettings"
         />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.begoml.app.profile.ProfileFragment"
+        android:name="com.begoml.app.presentation.profile.ProfileFragment"
         android:label="ProfileFragment"
         />
     <fragment
         android:id="@+id/loginMviFragment"
-        android:name="com.begoml.app.loginmvi.LoginMviFragment"
+        android:name="com.begoml.app.presentation.loginmvi.LoginMviFragment"
         android:label="LoginMviFragment"
         />
 

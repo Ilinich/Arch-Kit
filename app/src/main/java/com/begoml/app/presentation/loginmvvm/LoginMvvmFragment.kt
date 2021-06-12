@@ -1,4 +1,4 @@
-package com.begoml.app.loginmvvm
+package com.begoml.app.presentation.loginmvvm
 
 import android.os.Bundle
 import android.view.View

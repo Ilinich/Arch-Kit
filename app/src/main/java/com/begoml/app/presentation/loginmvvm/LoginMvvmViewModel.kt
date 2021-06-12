@@ -1,7 +1,7 @@
-package com.begoml.app.loginmvvm
+package com.begoml.app.presentation.loginmvvm
 
 import androidx.lifecycle.ViewModel
-import com.begoml.app.loginmvvm.LoginMvvmViewModel.*
+import com.begoml.app.presentation.loginmvvm.LoginMvvmViewModel.*
 import com.begoml.archkit.viewmodel.ViewStateDelegate
 import com.begoml.archkit.viewmodel.ViewStateDelegateImpl
 

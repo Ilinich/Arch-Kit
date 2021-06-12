@@ -1,4 +1,4 @@
-package com.begoml.app.startfragment
+package com.begoml.app.presentation.startfragment
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.begoml.app.R
 import com.begoml.app.databinding.FragmentStartBinding
-import com.begoml.app.startfragment.StartFragmentViewModel.*
+import com.begoml.app.presentation.startfragment.StartFragmentViewModel.*
 import com.begoml.archkit.viewstate.collectEvent
 
 class StartFragment : Fragment(R.layout.fragment_start) {

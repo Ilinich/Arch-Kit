@@ -1,8 +1,8 @@
-package com.begoml.app.startfragment
+package com.begoml.app.presentation.startfragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.begoml.app.startfragment.StartFragmentViewModel.Event
+import com.begoml.app.presentation.startfragment.StartFragmentViewModel.Event
 import com.begoml.archkit.viewmodel.ViewStateDelegate
 import com.begoml.archkit.viewmodel.ViewStateDelegateImpl
 
