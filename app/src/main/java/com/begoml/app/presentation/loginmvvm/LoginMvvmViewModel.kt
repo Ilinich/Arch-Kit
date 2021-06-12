@@ -11,6 +11,8 @@ import com.begoml.app.tools.view.InputView.InputViewState.DefaultState
 import com.begoml.app.tools.view.InputView.InputViewState.ErrorState
 import com.begoml.archkit.viewmodel.ViewStateDelegate
 import com.begoml.archkit.viewmodel.ViewStateDelegateImpl
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class LoginMvvmViewModel(
     private val resourceProvider: ResourceProvider
@@ -18,6 +20,7 @@ class LoginMvvmViewModel(
     ViewStateDelegate<ViewState, Event> by ViewStateDelegateImpl(initialViewState = ViewState()) {
 
     data class ViewState(
+        val isLoading: Boolean = false,
         val isValidEmail: Boolean = false,
         val isValidFirstPassword: Boolean = false,
         val buttonIsEnabled: Boolean = false,
@@ -27,7 +30,6 @@ class LoginMvvmViewModel(
 
     sealed class Event {
         object UserIsLoginIn : Event()
-        data class ShowMessage(val message: String) : Event()
     }
 
     private val wrongPasswordText by lazy {
@@ -136,6 +138,24 @@ class LoginMvvmViewModel(
                     )
                 }
             }
+        }
+    }
+
+    fun onRegisterUserButtonClicked() {
+        if (!validateAllFields()) {
+            return
+        }
+        viewModelScope.launch {
+            reduce {
+                it.copy(
+                    isLoading = true
+                )
+            }
+            delay(2500)
+            sendEvent(
+                Event.UserIsLoginIn
+            )
+
         }
     }
 

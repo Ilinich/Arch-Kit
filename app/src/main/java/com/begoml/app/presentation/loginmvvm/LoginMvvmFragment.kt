@@ -2,13 +2,17 @@ package com.begoml.app.presentation.loginmvvm
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.begoml.app.R
 import com.begoml.app.databinding.FragmentLoginMvvmBinding
 import com.begoml.app.di.AppComponent
 import com.begoml.app.presentation.loginmvvm.LoginMvvmViewModel.ViewState
+import com.begoml.app.tools.hideSoftKeyboard
+import com.begoml.archkit.viewstate.collectEvent
 import com.begoml.archkit.viewstate.render
 import com.begoml.archkit.viewstate.viewStateWatcher
 import javax.inject.Inject
@@ -22,6 +26,9 @@ class LoginMvvmFragment : Fragment(R.layout.fragment_login_mvvm) {
 
     private val watcher = viewStateWatcher<ViewState> {
 
+        ViewState::isLoading {
+            binding.progressBar.isVisible = it
+        }
         ViewState::buttonIsEnabled {
             binding.buttonSend.isEnabled = it
         }
@@ -49,6 +56,13 @@ class LoginMvvmFragment : Fragment(R.layout.fragment_login_mvvm) {
             lifecycleOwner = viewLifecycleOwner,
             watcher = watcher
         )
+        viewModel.collectEvent(lifecycle) { event ->
+            return@collectEvent when (event) {
+                is LoginMvvmViewModel.Event.UserIsLoginIn -> {
+                    navigateToMainScreen()
+                }
+            }
+        }
         binding.inputLogin.apply {
             onClickKeyboardDoneButton {
                 viewModel.onLoginFocusChanged(userLogin)
@@ -65,5 +79,13 @@ class LoginMvvmFragment : Fragment(R.layout.fragment_login_mvvm) {
                 viewModel.onUserLoginFocusChanged(userPassword)
             }
         }
+        binding.buttonSend.setOnClickListener {
+            it.hideSoftKeyboard()
+            viewModel.onRegisterUserButtonClicked()
+        }
+    }
+
+    private fun navigateToMainScreen() {
+        findNavController().popBackStack()
     }
 }
