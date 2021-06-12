@@ -63,25 +63,27 @@ class LoginMvvmFragment : Fragment(R.layout.fragment_login_mvvm) {
                 }
             }
         }
-        binding.inputLogin.apply {
-            onClickKeyboardDoneButton {
-                viewModel.onLoginFocusChanged(userLogin)
+        with(binding){
+            inputLogin.apply {
+                onClickKeyboardDoneButton {
+                    viewModel.onLoginFocusChanged(userLogin)
+                }
+                onEditTextChangeFocus {
+                    viewModel.onLoginFocusChanged(userLogin)
+                }
             }
-            onEditTextChangeFocus {
-                viewModel.onLoginFocusChanged(userLogin)
+            inputPass.apply {
+                onClickKeyboardDoneButton {
+                    viewModel.onUserLoginFocusChanged(userPassword)
+                }
+                onEditTextChangeFocus {
+                    viewModel.onUserLoginFocusChanged(userPassword)
+                }
             }
-        }
-        binding.inputPass.apply {
-            onClickKeyboardDoneButton {
-                viewModel.onUserLoginFocusChanged(userPassword)
+            buttonSend.setOnClickListener {
+                it.hideSoftKeyboard()
+                viewModel.onRegisterUserButtonClicked()
             }
-            onEditTextChangeFocus {
-                viewModel.onUserLoginFocusChanged(userPassword)
-            }
-        }
-        binding.buttonSend.setOnClickListener {
-            it.hideSoftKeyboard()
-            viewModel.onRegisterUserButtonClicked()
         }
     }
 

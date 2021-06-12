@@ -24,19 +24,19 @@
 
             <TextView
                 android:id="@+id/text_header_hint"
-                android:textAppearance="?android:textAppearanceLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="@color/black"
                 />
 
             <TextView
                 android:id="@+id/text_header_hint_right"
-                android:textAppearance="?android:textAppearanceLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:textAppearance="?android:textAppearanceLarge"
                 android:textStyle="normal"
                 tools:ignore="RtlHardcoded"
                 />
