@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Arch-Kit</string>
+    <string name="fragment_start__login_mvvm_btn">Login mvvm</string>
+    <string name="fragment_start__login_mvi_btn">Login mvi</string>
+    <string name="fragment_start__go_profile_btn">Profile</string>
 </resources>

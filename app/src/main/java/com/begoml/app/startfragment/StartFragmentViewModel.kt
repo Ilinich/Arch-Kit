@@ -2,29 +2,34 @@ package com.begoml.app.startfragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.begoml.app.startfragment.StartFragmentViewModel.*
+import com.begoml.app.startfragment.StartFragmentViewModel.Event
 import com.begoml.archkit.viewmodel.ViewStateDelegate
 import com.begoml.archkit.viewmodel.ViewStateDelegateImpl
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
-class StartFragmentViewModel() : ViewModel(), ViewStateDelegate<ViewState, Event> by ViewStateDelegateImpl(initialViewState = ViewState()) {
-
-    data class ViewState(
-        val isDataLoading: Boolean = false
-    )
+class StartFragmentViewModel : ViewModel(),
+    ViewStateDelegate<Unit, Event> by ViewStateDelegateImpl(Unit) {
 
     sealed class Event {
-        object NavigateToNextScreen : Event()
+        object NavigateToMvvmScreen : Event()
+        object NavigateToProfileScreen : Event()
+        object NavigateToMviScreen : Event()
     }
 
+    fun onBtnMvvmClicked() {
+        viewModelScope.sendEvent(
+            Event.NavigateToMvvmScreen
+        )
+    }
 
-    fun navigateToNextScreen(){
-        viewModelScope.launch {
-            delay(300)
-            sendEvent(
-                Event.NavigateToNextScreen
-            )
-        }
+    fun onBtnProfileClicked() {
+        viewModelScope.sendEvent(
+            Event.NavigateToProfileScreen
+        )
+    }
+
+    fun onBtnMviClicked() {
+        viewModelScope.sendEvent(
+            Event.NavigateToMviScreen
+        )
     }
 }

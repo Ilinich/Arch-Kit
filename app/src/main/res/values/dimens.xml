@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="layout_margin_32dp">32dp</dimen>
+</resources>
