@@ -6,9 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <include
+        android:id="@+id/item_profile"
+        layout="@layout/item_fragment_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_profile"
+        android:layout_marginBottom="@dimen/padding_16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

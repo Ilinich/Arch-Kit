@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:id="@+id/image_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="center"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/avatars"
+        />
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_16dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_24sp"
+        tools:ignore="RtlSymmetry"
+        tools:text="Emma Watson"
+        />
+
+    <TextView
+        android:id="@+id/text_userInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_16dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_20sp"
+        tools:ignore="RtlSymmetry"
+        tools:text="Actress"
+        />
+
+    <TextView
+        android:id="@+id/text_born"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_16dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_20sp"
+        tools:ignore="RtlSymmetry"
+        tools:text="April 15, 1990 (age 31 years), Paris, France"
+        />
+
+    <TextView
+        android:id="@+id/text_education"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_16dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_20sp"
+        tools:ignore="RtlSymmetry"
+        tools:text="Brown University (2009–2014)"
+        />
+</LinearLayout>
