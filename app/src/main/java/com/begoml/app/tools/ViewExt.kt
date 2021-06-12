@@ -1,23 +1,19 @@
 package com.begoml.app.tools
 
-import android.graphics.drawable.Drawable
-import android.transition.Slide
-import android.transition.TransitionManager
-import android.view.Gravity
+import android.content.Context
+import android.os.Parcelable
+import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
+import androidx.core.view.children
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.begoml.app.R
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
 
 
 fun RecyclerView.setDivider(@DrawableRes drawableRes: Int) {
@@ -46,4 +42,22 @@ fun ImageView.loadImage(
         .error(errorImage)
         .fitCenter()
         .into(this)
+}
+
+fun View.hideSoftKeyboard() {
+    try {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(applicationWindowToken, 0)
+    } catch (ignored: Exception) {
+    }
+}
+
+fun ViewGroup.restoreChildViewStates(childViewStates: SparseArray<Parcelable>) {
+    children.forEach { child -> child.restoreHierarchyState(childViewStates) }
+}
+
+fun ViewGroup.saveChildViewStates(): SparseArray<Parcelable> {
+    val childViewStates = SparseArray<Parcelable>()
+    children.forEach { child -> child.saveHierarchyState(childViewStates) }
+    return childViewStates
 }

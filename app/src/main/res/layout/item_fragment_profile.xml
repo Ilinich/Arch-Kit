@@ -19,6 +19,7 @@
 
     <TextView
         android:id="@+id/text_name"
+        android:textAppearance="?android:textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/padding_16dp"
@@ -30,6 +31,7 @@
 
     <TextView
         android:id="@+id/text_userInfo"
+        android:textAppearance="?android:textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/padding_16dp"
@@ -41,6 +43,7 @@
 
     <TextView
         android:id="@+id/text_born"
+        android:textAppearance="?android:textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/padding_16dp"
@@ -52,6 +55,7 @@
 
     <TextView
         android:id="@+id/text_education"
+        android:textAppearance="?android:textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/padding_16dp"

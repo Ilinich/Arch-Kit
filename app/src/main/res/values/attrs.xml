@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="InputView">
+        <attr name="header_text_size" format="dimension" />
+        <attr name="header_text_all_caps" format="boolean" />
+        <attr name="text_header" format="string" />
+        <attr name="text_header_right" format="string" />
+        <attr name="color_header" format="color" />
+        <attr name="text_hint" format="string" />
+        <attr name="color_text_footer" format="color" />
+        <attr name="color_box_stroke" format="color" />
+        <attr name="color_text_header_right" format="color" />
+        <attr name="text_footer" format="string" />
+        <attr name="toggle_enabled" format="integer" />
+        <attr name="android:inputType" />
+        <attr name="passwordDrawable" format="reference" />
+        <attr name="input_boxCornerRadiusBottomEnd" format="dimension" />
+        <attr name="input_boxCornerRadiusTopEnd" format="dimension" />
+    </declare-styleable>
+</resources>
