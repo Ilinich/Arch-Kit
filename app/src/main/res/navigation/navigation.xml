@@ -16,10 +16,6 @@
             app:destination="@id/loginMvvmFragment"
             />
         <action
-            android:id="@+id/actionToProfileFragment"
-            app:destination="@id/profileFragment"
-            />
-        <action
             android:id="@+id/actionLoginMviFragment"
             app:destination="@id/loginMviFragment"
             />
@@ -29,16 +25,25 @@
         android:id="@+id/loginMvvmFragment"
         android:name="com.begoml.app.presentation.loginmvvm.LoginMvvmFragment"
         android:label="FragmentSettings"
-        />
+        >
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.begoml.app.presentation.profile.ProfileFragment"
         android:label="ProfileFragment"
+        app:popUpTo="@+id/startFragment"
         />
     <fragment
         android:id="@+id/loginMviFragment"
         android:name="com.begoml.app.presentation.loginmvi.LoginMviFragment"
         android:label="LoginMviFragment"
+        />
+    <action
+        android:id="@+id/globalToProfileFragment"
+        app:destination="@id/profileFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/startFragment"
+        app:popUpToInclusive="false"
         />
 
 </navigation>

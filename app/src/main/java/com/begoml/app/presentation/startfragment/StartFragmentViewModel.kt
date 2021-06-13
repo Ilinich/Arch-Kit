@@ -11,19 +11,12 @@ class StartFragmentViewModel : ViewModel(),
 
     sealed class Event {
         object NavigateToMvvmScreen : Event()
-        object NavigateToProfileScreen : Event()
         object NavigateToMviScreen : Event()
     }
 
     fun onBtnMvvmClicked() {
         viewModelScope.sendEvent(
             Event.NavigateToMvvmScreen
-        )
-    }
-
-    fun onBtnProfileClicked() {
-        viewModelScope.sendEvent(
-            Event.NavigateToProfileScreen
         )
     }
 

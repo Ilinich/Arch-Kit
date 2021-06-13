@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.begoml.app.R
 import com.begoml.app.presentation.loginmvvm.LoginMvvmViewModel.Event
 import com.begoml.app.presentation.loginmvvm.LoginMvvmViewModel.ViewState
+import com.begoml.app.presentation.loginmvvm.InputState.*
 import com.begoml.app.tools.ResourceProvider
 import com.begoml.app.tools.view.InputView.InputViewState
-import com.begoml.app.tools.view.InputView.InputViewState.DefaultState
 import com.begoml.app.tools.view.InputView.InputViewState.ErrorState
 import com.begoml.archkit.viewmodel.ViewStateDelegate
 import com.begoml.archkit.viewmodel.ViewStateDelegateImpl
@@ -24,8 +24,8 @@ class LoginMvvmViewModel(
         val isValidEmail: Boolean = false,
         val isValidFirstPassword: Boolean = false,
         val buttonIsEnabled: Boolean = false,
-        val loginState: InputViewState = DefaultState,
-        val passwordState: InputViewState = DefaultState,
+        val loginState: InputViewState = DEFAULT_STATE.getState(),
+        val passwordState: InputViewState = DEFAULT_STATE.getState(),
     )
 
     sealed class Event {
@@ -89,7 +89,7 @@ class LoginMvvmViewModel(
                 viewModelScope.reduce {
                     it.copy(
                         isValidEmail = true,
-                        loginState = ErrorState(
+                        loginState = ERROR_STATE.getState(
                             null,
                             colorError = mediumBlueColor,
                             colorFooter = null
@@ -106,7 +106,7 @@ class LoginMvvmViewModel(
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = false,
-                        passwordState = ErrorState(
+                        passwordState = ERROR_STATE.getState(
                             messageFooter = null,
                             colorError = mediumBlueColor,
                             colorFooter = grayColor
@@ -118,10 +118,10 @@ class LoginMvvmViewModel(
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = false,
-                        passwordState = ErrorState(
+                        passwordState = ERROR_STATE.getState(
                             messageFooter = wrongPasswordText,
                             colorError = errorColor,
-                            colorFooter = errorColor
+                            colorFooter = grayColor
                         )
                     )
                 }
@@ -130,7 +130,7 @@ class LoginMvvmViewModel(
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = true,
-                        passwordState = ErrorState(
+                        passwordState = ERROR_STATE.getState(
                             messageFooter = null,
                             colorError = mediumBlueColor,
                             colorFooter = grayColor
@@ -165,8 +165,8 @@ class LoginMvvmViewModel(
         if (isValidAllFields) {
             viewModelScope.reduce {
                 it.copy(
-                    loginState = DefaultState,
-                    passwordState = DefaultState,
+                    loginState = DEFAULT_STATE.getState(),
+                    passwordState = DEFAULT_STATE.getState(),
                     buttonIsEnabled = true
                 )
             }
