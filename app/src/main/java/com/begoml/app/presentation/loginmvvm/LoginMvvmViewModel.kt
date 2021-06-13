@@ -155,7 +155,6 @@ class LoginMvvmViewModel(
             sendEvent(
                 Event.UserIsLoginIn
             )
-
         }
     }
 
