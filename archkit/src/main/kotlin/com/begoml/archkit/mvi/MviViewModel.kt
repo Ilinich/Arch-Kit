@@ -4,10 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 /**
@@ -16,12 +13,12 @@ import kotlinx.coroutines.launch
  */
 abstract class MviViewModel<ViewState, UiEvent, Command, Effect, News>(
     viewState: ViewState,
-    private val eventHandler: EventHandler<UiEvent, Command>,
+    private val eventTransformer: EventTransformer<UiEvent, Command>,
     private val actor: Actor<ViewState, Command, Effect>,
     private val reducer: Reducer<ViewState, Effect>,
     private val postProcessor: PostProcessor<ViewState, Effect, Command>? = null,
     private val newsPublisher: NewsPublisher<ViewState, Effect, News>? = null,
-    bootstrapper: Bootstrapper<Command>? = null
+    bootstrapper: Bootstrapper<Command>? = null,
 ) : ViewModel() {
 
     private val state = MutableStateFlow(viewState)
@@ -34,11 +31,25 @@ abstract class MviViewModel<ViewState, UiEvent, Command, Effect, News>(
     open val singleEvent: Flow<News>
         get() = singleLiveEvent.receiveAsFlow()
 
+    private val commandSharedFlow = MutableSharedFlow<Command>(replay = 10)
+    private val commands: SharedFlow<Command> get() = commandSharedFlow
+
+    private val uiEventSharedFlow = MutableSharedFlow<UiEvent>()
+    private val uiEvents: SharedFlow<UiEvent> get() = uiEventSharedFlow
+
+    private val effectSharedFlow = MutableSharedFlow<Effect>()
+    private val effects: SharedFlow<Effect> get() = effectSharedFlow
+
     init {
-        bootstrapper?.let { bootstrapper ->
-            bootstrapper { command ->
-                nextCommand(command)
-            }
+        viewModelScope.launch {
+            val bootstrapperFlow = bootstrapper?.invoke()?.asFlow() ?: emptyFlow()
+            listOf(
+                bootstrapperFlow,
+                commands,
+                uiEvents.map(eventTransformer::invoke)
+            )
+                .merge()
+                .collect(::nextCommand)
         }
     }
 
@@ -47,8 +58,9 @@ abstract class MviViewModel<ViewState, UiEvent, Command, Effect, News>(
      * @param event - ui intent
      */
     open fun dispatchEvent(event: UiEvent) {
-        val command = eventHandler(event)
-        nextCommand(command)
+        viewModelScope.launch {
+            uiEventSharedFlow.emit(event)
+        }
     }
 
     private fun nextCommand(command: Command) {
@@ -79,11 +91,8 @@ abstract class MviViewModel<ViewState, UiEvent, Command, Effect, News>(
 
 private fun <T> MutableStateFlow<T>.state() = this.value
 
-typealias EventHandler<Event, Command> = (event: Event) -> Command
+typealias EventTransformer<Event, Command> = (event: Event) -> Command
 
-/**
- * Lives while the ViewModel lives
- */
 typealias Actor<ViewState, Command, Effect> = (state: ViewState, command: Command, viewModelScope: CoroutineScope, sendEffect: (effect: Effect) -> Unit) -> Unit
 
 typealias Reducer<ViewState, Effect> = (state: ViewState, effect: Effect) -> ViewState
@@ -92,5 +101,5 @@ typealias NewsPublisher<ViewState, Effect, News> = (state: ViewState, effect: Ef
 
 typealias PostProcessor<ViewState, Effect, Command> = (state: ViewState, effect: Effect) -> Command?
 
-typealias Bootstrapper<Command> = (sendCommand: (command: Command) -> Unit) -> Unit
+typealias Bootstrapper<Command> = () -> List<Command>
 

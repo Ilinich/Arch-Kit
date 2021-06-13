@@ -40,7 +40,7 @@ android {
 dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
 
     // ui
     implementation("androidx.appcompat:appcompat:1.3.0")
