@@ -6,6 +6,7 @@ import com.begoml.app.di.module.ProvidersModule
 import com.begoml.app.di.module.RepositoryModule
 import com.begoml.app.presentation.ArchKitApplication
 import com.begoml.app.presentation.activity.MainActivity
+import com.begoml.app.presentation.loginmvi.LoginMviFragment
 import com.begoml.app.presentation.loginmvvm.LoginMvvmFragment
 import com.begoml.app.presentation.profile.ProfileFragment
 import com.begoml.app.presentation.startfragment.StartFragment
@@ -35,6 +36,7 @@ interface AppComponent {
     fun inject(where: ArchKitApplication)
     fun inject(where: ProfileFragment)
     fun inject(where: LoginMvvmFragment)
+    fun inject(where: LoginMviFragment)
 
     companion object {
 
