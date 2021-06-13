@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/startFragment"
+    >
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.begoml.app.presentation.startfragment.StartFragment"
+        android:label="FragmentSettings"
+        >
+        <action
+            android:id="@+id/actionToLoginMvvmFragment"
+            app:destination="@id/loginMvvmFragment"
+            />
+        <action
+            android:id="@+id/actionToProfileFragment"
+            app:destination="@id/profileFragment"
+            />
+        <action
+            android:id="@+id/actionLoginMviFragment"
+            app:destination="@id/loginMviFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginMvvmFragment"
+        android:name="com.begoml.app.presentation.loginmvvm.LoginMvvmFragment"
+        android:label="FragmentSettings"
+        />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.begoml.app.presentation.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        />
+    <fragment
+        android:id="@+id/loginMviFragment"
+        android:name="com.begoml.app.presentation.loginmvi.LoginMviFragment"
+        android:label="LoginMviFragment"
+        />
+
+</navigation>

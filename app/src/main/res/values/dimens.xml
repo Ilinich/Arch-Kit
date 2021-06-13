@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="layout_margin_32dp">32dp</dimen>
+    <dimen name="text_20sp">20sp</dimen>
+    <dimen name="text_24sp">24sp</dimen>
+    <dimen name="corner_radius_10dp">10dp</dimen>
+</resources>

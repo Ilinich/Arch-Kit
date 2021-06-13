@@ -1,0 +1,45 @@
+{
+  "user": "Emma Watson",
+  "imgUrl": "https://images.businessoffashion.com/profiles/asset/1576627872477040/emma-watson-1577236307043261.png?auto=format%2Ccompress&crop=top&fit=crop&h=576&w=1024",
+  "userInfo": "Actress",
+  "born": "April 15, 1990 (age 31 years), Paris, France",
+  "education": "Brown University (2009–2014)",
+  "movies": [
+    {
+      "name": "Harry Potter and the Philosopher's Stone",
+      "year": "2001"
+    },
+    {
+      "name": "Harry Potter and the Chamber of Secrets",
+      "year": "2002"
+    },
+    {
+      "name": "Harry Potter and the Prisoner of Azkaban",
+      "year": "2004"
+    },
+    {
+      "name": "Harry Potter and the Goblet of Fire",
+      "year": "2005"
+    },
+    {
+      "name": "Harry Potter and the Order of the Phoenix",
+      "year": "2007"
+    },
+    {
+      "name": "The Tale of Despereaux",
+      "year": "2008"
+    },
+    {
+      "name": "Harry Potter and the Half-Blood Prince",
+      "year": "2009"
+    },
+    {
+      "name": "Harry Potter and the Deathly Hallows – Part 1",
+      "year": "2010"
+    },
+    {
+      "name": "Harry Potter and the Deathly Hallows – Part 2",
+      "year": "2011"
+    }
+  ]
+}
