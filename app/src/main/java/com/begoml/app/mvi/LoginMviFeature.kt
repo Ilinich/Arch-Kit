@@ -27,7 +27,7 @@ class LoginMviFeature : MviViewModel<ViewState, Event, Command, Effect, News>(
         data class StartLogin(
             val login: String,
             val password: String,
-        ) : Effect()
+        ) : Event()
     }
 
     sealed class Command {
