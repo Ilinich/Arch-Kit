@@ -1,6 +1,5 @@
 package com.begoml.app.presentation.loginmvvm
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.begoml.app.R
@@ -102,7 +101,6 @@ class LoginMvvmViewModel(
     private fun validatePassword(firstPassword: String) {
         when {
             firstPassword.isEmpty() -> {
-                Log.d("TAG", "validatePassword: ${firstPassword.isEmpty()}")
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = false,
@@ -115,12 +113,11 @@ class LoginMvvmViewModel(
                 }
             }
             firstPassword.equals("12345", true).not() -> {
-                Log.d("TAG", "ot: ${firstPassword.equals("12345", true).not()}")
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = false,
                         passwordState = InputViewState.ErrorState(
-                            messageFooter = resourceProvider.getString(R.string.login__wrong_email_text),
+                            messageFooter = wrongPasswordText,
                             colorError = errorColor,
                             colorFooter = errorColor
                         )
