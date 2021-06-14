@@ -2,7 +2,6 @@ package com.begoml.app.tools
 
 import android.content.Context
 import android.os.Parcelable
-import android.util.Patterns
 import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup

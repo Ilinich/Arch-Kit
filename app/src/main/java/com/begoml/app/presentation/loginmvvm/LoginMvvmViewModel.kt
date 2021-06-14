@@ -7,8 +7,6 @@ import com.begoml.app.presentation.loginmvvm.LoginMvvmViewModel.Event
 import com.begoml.app.presentation.loginmvvm.LoginMvvmViewModel.ViewState
 import com.begoml.app.tools.ResourceProvider
 import com.begoml.app.tools.view.InputView.InputViewState
-import com.begoml.app.tools.view.InputView.InputViewState.DefaultState
-import com.begoml.app.tools.view.InputView.InputViewState.ErrorState
 import com.begoml.archkit.viewmodel.ViewStateDelegate
 import com.begoml.archkit.viewmodel.ViewStateDelegateImpl
 import kotlinx.coroutines.delay
@@ -24,8 +22,8 @@ class LoginMvvmViewModel(
         val isValidEmail: Boolean = false,
         val isValidFirstPassword: Boolean = false,
         val buttonIsEnabled: Boolean = false,
-        val loginState: InputViewState = DefaultState,
-        val passwordState: InputViewState = DefaultState,
+        val loginState: InputViewState = InputViewState.DefaultState,
+        val passwordState: InputViewState = InputViewState.DefaultState,
     )
 
     sealed class Event {
@@ -65,7 +63,7 @@ class LoginMvvmViewModel(
                     it.copy(
                         isValidEmail = false,
                         buttonIsEnabled = false,
-                        loginState = ErrorState(
+                        loginState = InputViewState.ErrorState(
                             messageFooter = null,
                             colorError = mediumBlueColor,
                             colorFooter = null
@@ -77,7 +75,7 @@ class LoginMvvmViewModel(
                 viewModelScope.reduce {
                     it.copy(
                         isValidEmail = false,
-                        loginState = ErrorState(
+                        loginState = InputViewState.ErrorState(
                             messageFooter = resourceProvider.getString(R.string.login__wrong_email_text),
                             colorError = errorColor,
                             colorFooter = errorColor
@@ -89,7 +87,7 @@ class LoginMvvmViewModel(
                 viewModelScope.reduce {
                     it.copy(
                         isValidEmail = true,
-                        loginState = ErrorState(
+                        loginState = InputViewState.ErrorState(
                             null,
                             colorError = mediumBlueColor,
                             colorFooter = null
@@ -106,7 +104,7 @@ class LoginMvvmViewModel(
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = false,
-                        passwordState = ErrorState(
+                        passwordState = InputViewState.ErrorState(
                             messageFooter = null,
                             colorError = mediumBlueColor,
                             colorFooter = grayColor
@@ -118,7 +116,7 @@ class LoginMvvmViewModel(
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = false,
-                        passwordState = ErrorState(
+                        passwordState = InputViewState.ErrorState(
                             messageFooter = wrongPasswordText,
                             colorError = errorColor,
                             colorFooter = errorColor
@@ -130,7 +128,7 @@ class LoginMvvmViewModel(
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = true,
-                        passwordState = ErrorState(
+                        passwordState = InputViewState.ErrorState(
                             messageFooter = null,
                             colorError = mediumBlueColor,
                             colorFooter = grayColor
@@ -155,7 +153,6 @@ class LoginMvvmViewModel(
             sendEvent(
                 Event.UserIsLoginIn
             )
-
         }
     }
 
@@ -165,8 +162,8 @@ class LoginMvvmViewModel(
         if (isValidAllFields) {
             viewModelScope.reduce {
                 it.copy(
-                    loginState = DefaultState,
-                    passwordState = DefaultState,
+                    loginState = InputViewState.DefaultState,
+                    passwordState = InputViewState.DefaultState,
                     buttonIsEnabled = true
                 )
             }

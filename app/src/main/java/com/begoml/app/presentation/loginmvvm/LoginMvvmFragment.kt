@@ -10,8 +10,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.begoml.app.R
 import com.begoml.app.databinding.FragmentLoginMvvmBinding
 import com.begoml.app.di.AppComponent
-import com.begoml.app.presentation.loginmvvm.LoginMvvmViewModel.ViewState
+import com.begoml.app.presentation.loginmvvm.LoginMvvmViewModel.*
 import com.begoml.app.tools.hideSoftKeyboard
+import com.begoml.app.tools.navigateSafe
 import com.begoml.archkit.viewstate.collectEvent
 import com.begoml.archkit.viewstate.render
 import com.begoml.archkit.viewstate.viewStateWatcher
@@ -58,12 +59,12 @@ class LoginMvvmFragment : Fragment(R.layout.fragment_login_mvvm) {
         )
         viewModel.collectEvent(lifecycle) { event ->
             return@collectEvent when (event) {
-                is LoginMvvmViewModel.Event.UserIsLoginIn -> {
-                    navigateToMainScreen()
+                is Event.UserIsLoginIn -> {
+                    navigateToProfileScreen()
                 }
             }
         }
-        with(binding){
+        with(binding) {
             inputLogin.apply {
                 onClickKeyboardDoneButton {
                     viewModel.onLoginFocusChanged(userLogin)
@@ -87,7 +88,9 @@ class LoginMvvmFragment : Fragment(R.layout.fragment_login_mvvm) {
         }
     }
 
-    private fun navigateToMainScreen() {
-        findNavController().popBackStack()
+    private fun navigateToProfileScreen() {
+        findNavController().navigateSafe(R.id.loginMvvmFragment) {
+            navigate(R.id.globalToProfileFragment)
+        }
     }
 }

@@ -24,24 +24,18 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         viewModel.collectEvent(
             lifecycle
         ) { event ->
-            return@collectEvent when (event){
+            return@collectEvent when (event) {
                 Event.NavigateToMvvmScreen -> {
                     navigateToNextScreen(R.id.actionToLoginMvvmFragment)
-                }
-                Event.NavigateToProfileScreen -> {
-                    navigateToNextScreen(R.id.actionToProfileFragment)
                 }
                 Event.NavigateToMviScreen -> {
                     navigateToNextScreen(R.id.actionLoginMviFragment)
                 }
             }
         }
-        with(binding){
+        with(binding) {
             btnGoLoginMvvm.setOnClickListener {
                 viewModel.onBtnMvvmClicked()
-            }
-            btnGoProfile.setOnClickListener {
-                viewModel.onBtnProfileClicked()
             }
             btnGoLoginMvi.setOnClickListener {
                 viewModel.onBtnMviClicked()
@@ -49,9 +43,10 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         }
     }
 
-    private fun navigateToNextScreen(@IdRes screenId: Int){
-        findNavController().navigateSafe(R.id.startFragment){
-            navigate(screenId)
-        }
+    private fun navigateToNextScreen(@IdRes screenId: Int) {
+        findNavController()
+            .navigateSafe(R.id.startFragment) {
+                navigate(screenId)
+            }
     }
 }
