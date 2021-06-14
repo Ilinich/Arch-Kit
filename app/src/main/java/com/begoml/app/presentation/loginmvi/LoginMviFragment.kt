@@ -15,6 +15,7 @@ import com.begoml.archkit.viewstate.collectEvent
 import com.begoml.archkit.viewstate.render
 import com.begoml.archkit.viewstate.viewStateWatcher
 import com.begoml.app.presentation.loginmvi.LoginMviViewModel.*
+import com.begoml.app.tools.navigateSafe
 import javax.inject.Inject
 
 class LoginMviFragment : Fragment(R.layout.fragment_login_mvvm) {
@@ -28,6 +29,15 @@ class LoginMviFragment : Fragment(R.layout.fragment_login_mvvm) {
 
         ViewState::isLoading {
             binding.progressBar.isVisible = it
+        }
+        ViewState::buttonIsEnabled {
+            binding.buttonSend.isEnabled = it
+        }
+        ViewState::loginState {
+            binding.inputLogin.renderView(it)
+        }
+        ViewState::passwordState {
+            binding.inputPass.renderView(it)
         }
     }
 
@@ -51,12 +61,12 @@ class LoginMviFragment : Fragment(R.layout.fragment_login_mvvm) {
         viewModel.collectEvent(lifecycle) { event ->
             return@collectEvent when (event) {
                 is News.GoToProfile -> {
-                    findNavController().popBackStack() // todo got to profile
-                    Unit
+                    findNavController().navigateSafe(R.id.loginMviFragment) {
+                        navigate(R.id.globalToProfileFragment)
+                    }
                 }
             }
         }
-
         with(binding){
             inputLogin.apply {
                 onClickKeyboardDoneButton {
@@ -68,10 +78,10 @@ class LoginMviFragment : Fragment(R.layout.fragment_login_mvvm) {
             }
             inputPass.apply {
                 onClickKeyboardDoneButton {
-                    // viewModel.onUserLoginFocusChanged(userPassword)
+                     viewModel.dispatchEvent(Event.OnPasswordChanged(userPassword))
                 }
                 onEditTextChangeFocus {
-                    // viewModel.onUserLoginFocusChanged(userPassword)
+                    viewModel.dispatchEvent(Event.OnPasswordChanged(userPassword))
                 }
             }
             buttonSend.setOnClickListener {

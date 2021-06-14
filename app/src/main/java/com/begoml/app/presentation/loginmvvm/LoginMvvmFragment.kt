@@ -59,7 +59,7 @@ class LoginMvvmFragment : Fragment(R.layout.fragment_login_mvvm) {
         )
         viewModel.collectEvent(lifecycle) { event ->
             return@collectEvent when (event) {
-                is Event.UserIsLoginIn -> {
+                is Event.OnLoginClicked -> {
                     navigateToProfileScreen()
                 }
             }
