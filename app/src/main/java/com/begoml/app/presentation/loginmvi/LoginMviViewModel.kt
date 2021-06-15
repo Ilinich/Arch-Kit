@@ -6,6 +6,7 @@ import com.begoml.app.R
 import com.begoml.app.presentation.loginmvi.LoginMviViewModel.Event
 import com.begoml.app.presentation.loginmvi.LoginMviViewModel.News
 import com.begoml.app.presentation.loginmvi.LoginMviViewModel.ViewState
+import com.begoml.app.tools.Const.EMPTY_STRING
 import com.begoml.app.tools.ResourceProvider
 import com.begoml.app.tools.view.InputView.InputViewState
 import com.begoml.archkit.mvi.Actor
@@ -37,8 +38,8 @@ class LoginMviViewModel(
 
     data class ViewState(
         val isLoading: Boolean = false,
-        val login: String = "",
-        val password: String = "",
+        val login: String = EMPTY_STRING,
+        val password: String = EMPTY_STRING,
         val isValidEmail: Boolean = false,
         val isValidFirstPassword: Boolean = false,
         val buttonIsEnabled: Boolean = false,

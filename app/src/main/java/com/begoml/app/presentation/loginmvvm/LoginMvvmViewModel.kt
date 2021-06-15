@@ -27,7 +27,7 @@ class LoginMvvmViewModel(
     )
 
     sealed class Event {
-        object OnLoginClicked : Event()
+        object AuthFinished : Event()
     }
 
     private val wrongPasswordText by lazy {
@@ -151,7 +151,7 @@ class LoginMvvmViewModel(
             }
             delay(2500)
             sendEvent(
-                Event.OnLoginClicked
+                Event.AuthFinished
             )
         }
     }
