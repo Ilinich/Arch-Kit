@@ -27,7 +27,7 @@ class LoginMvvmViewModel(
     )
 
     sealed class Event {
-        object UserIsLoginIn : Event()
+        object AuthFinished : Event()
     }
 
     private val wrongPasswordText by lazy {
@@ -56,9 +56,9 @@ class LoginMvvmViewModel(
         validateAllFields()
     }
 
-    private fun validateEmail(email: String) {
+    private fun validateEmail(login: String) {
         when {
-            email.isEmpty() -> {
+            login.isEmpty() -> {
                 viewModelScope.reduce {
                     it.copy(
                         isValidEmail = false,
@@ -71,7 +71,7 @@ class LoginMvvmViewModel(
                     )
                 }
             }
-            email.equals("Emma", true).not() -> {
+            login.equals("Emma", true).not() -> {
                 viewModelScope.reduce {
                     it.copy(
                         isValidEmail = false,
@@ -98,9 +98,9 @@ class LoginMvvmViewModel(
         }
     }
 
-    private fun validatePassword(firstPassword: String) {
+    private fun validatePassword(password: String) {
         when {
-            firstPassword.isEmpty() -> {
+            password.isEmpty() -> {
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = false,
@@ -112,7 +112,7 @@ class LoginMvvmViewModel(
                     )
                 }
             }
-            firstPassword.equals("12345", true).not() -> {
+            password.equals("12345", true).not() -> {
                 viewModelScope.reduce {
                     it.copy(
                         isValidFirstPassword = false,
@@ -151,7 +151,7 @@ class LoginMvvmViewModel(
             }
             delay(2500)
             sendEvent(
-                Event.UserIsLoginIn
+                Event.AuthFinished
             )
         }
     }
