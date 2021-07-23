@@ -9,7 +9,6 @@ import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-
 interface Feature<ViewState, Event, UiEvent> {
 
     val viewState: Flow<ViewState>
@@ -18,7 +17,6 @@ interface Feature<ViewState, Event, UiEvent> {
 
     fun dispatchEvent(event: UiEvent)
 }
-
 
 /**
  * intermediary between Model and View that decides how to handle Events,
@@ -32,7 +30,7 @@ class FeatureImpl<ViewState, UiEvent, Command, Effect, News>(
     private val postProcessor: PostProcessor<ViewState, Effect, Command>? = null,
     private val newsPublisher: NewsPublisher<ViewState, Effect, News>? = null,
     bootstrapper: Bootstrapper<Command>? = null,
-    val scope: CoroutineScope
+    private val scope: CoroutineScope
 ) : ViewStateDelegate<ViewState, News> by ViewStateDelegateImpl(viewState),
     Feature<ViewState, News, UiEvent>,
     CoroutineScope by scope {

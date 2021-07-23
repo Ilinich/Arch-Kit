@@ -20,6 +20,7 @@
         android:theme="@style/Theme.ArchKit"
         android:usesCleartextTraffic="true"
         tools:targetApi="m"
+        tools:ignore="AllowBackup"
         >
         <activity
             android:name="com.begoml.app.presentation.activity.MainActivity"
