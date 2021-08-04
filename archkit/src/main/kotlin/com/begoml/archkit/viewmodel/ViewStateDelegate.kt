@@ -1,5 +1,8 @@
 package com.begoml.archkit.viewmodel
 
+import android.annotation.SuppressLint
+import androidx.annotation.MainThread
+import androidx.arch.core.executor.ArchTaskExecutor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -31,6 +34,8 @@ interface ViewStateDelegate<ViewState, Event> {
      * Reduce are functions that take the current state and an action as arguments,
      * and changed a new state result. In other words, (state: ViewState) => newState.
      */
+    @MainThread
+    @Throws(IllegalStateException::class)
     fun CoroutineScope.reduce(action: (state: ViewState) -> ViewState)
 
     fun CoroutineScope.sendEvent(event: Event)
@@ -59,7 +64,15 @@ class ViewStateDelegateImpl<ViewState, Event>(
 
     override fun CoroutineScope.reduce(action: (state: ViewState) -> ViewState) {
         launch {
+            assertMainThread()
             stateFlow.emit(action(stateValue))
+        }
+    }
+    @SuppressLint("RestrictedApi")
+    @Throws(IllegalStateException::class)
+    private fun assertMainThread() {
+        check(ArchTaskExecutor.getInstance().isMainThread) {
+            throw IllegalStateException("Cannot invoke on a background thread")
         }
     }
 
