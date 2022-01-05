@@ -33,5 +33,5 @@ jobs:
     - name: Upload signed APK
       uses: actions/upload-artifact@v2
       with:
-          name: app-release.apk
+          name: app-debug.apk
           path: app/build/outputs/apk/debug/app-debug.apk
