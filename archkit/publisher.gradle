@@ -1,0 +1,63 @@
+apply plugin: 'maven-publish'
+
+ext {
+    contributorUserName = " "//TODO
+    contributorPassword = " " //TODO
+    libraryGroupId = "GroupId"  //TODO example - io.github.mzfkr97
+    libraryArtifact = "Artifact"  // TODO extensionPack
+    libraryVersion = "0.0.8"
+}
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}
+
+publishing {
+    repositories {
+        maven {
+            credentials {
+                username contributorUserName
+                password contributorPassword
+            }
+            url libraryVersion.endsWith("SNAPSHOT") ? repositorySnapshotUrl : repositoryReleaseUrl
+        }
+    }
+    publications {
+        AndroidLibrary(MavenPublication) {
+            groupId libraryGroupId
+            artifactId libraryArtifact
+            version libraryVersion
+            artifact "$buildDir/outputs/aar/${project.getName()}-release.aar" // TODO 
+            pom {
+                name = 'My LExtension Library'
+                description = 'A concise description of my library'
+                url = 'https://github.com/mzfkr97/extensionPack' // TODO extensionPack
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'mzfkr97' // TODO
+                        name = 'Roman'// TODO e
+                        email = 'gmail.com' // TODO
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://io.github.mzfkr97/extensionPack.git' // TODO
+                    developerConnection = 'scm:git:ssh://io.github.mzfkr97/extensionPack.git' // TODO
+                    url = 'https://io.github.mzfkr97/extensionPack/' // TODO
+                }
+            }
+        }
+    }
+    model {
+        tasks.publishAndroidLibraryPublicationToMavenRepository {
+            dependsOn project.tasks.assembleRelease
+        }
+    }
+}
+

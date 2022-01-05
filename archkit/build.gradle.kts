@@ -39,16 +39,16 @@ android {
 
 dependencies {
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.21")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
 
     // ui
     implementation("androidx.appcompat:appcompat:1.3.0")
-    implementation("androidx.fragment:fragment-ktx:1.3.4")
+    implementation("androidx.fragment:fragment-ktx:1.3.5")
 
     // lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0-alpha01")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0-alpha02")
 
     testImplementation(kotlin("test-junit"))
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")

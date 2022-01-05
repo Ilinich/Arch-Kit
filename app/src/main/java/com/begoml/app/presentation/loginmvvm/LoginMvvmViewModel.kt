@@ -15,7 +15,8 @@ import kotlinx.coroutines.launch
 class LoginMvvmViewModel(
     private val resourceProvider: ResourceProvider
 ) : ViewModel(),
-    ViewStateDelegate<ViewState, Event> by ViewStateDelegateImpl(initialViewState = ViewState()) {
+    ViewStateDelegate<ViewState, Event>
+        by ViewStateDelegateImpl(initialViewState = ViewState()) {
 
     data class ViewState(
         val isLoading: Boolean = false,
@@ -150,10 +151,20 @@ class LoginMvvmViewModel(
                 )
             }
             delay(2500)
+            trackAnalyticEvent()
             sendEvent(
                 Event.AuthFinished
             )
+        }.invokeOnCompletion {
+            viewModelScope.reduce {
+                it.copy(
+                    isLoading = false
+                )
+            }
         }
+    }
+    private fun trackAnalyticEvent() {
+        //TODO send event
     }
 
     private fun validateAllFields(): Boolean {

@@ -3,7 +3,6 @@ package com.begoml.app.presentation.loginmvi
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -11,14 +10,14 @@ import com.begoml.app.R
 import com.begoml.app.databinding.FragmentLoginMvvmBinding
 import com.begoml.app.di.AppComponent
 import com.begoml.app.tools.hideSoftKeyboard
-import com.begoml.archkit.viewstate.collectEvent
 import com.begoml.archkit.viewstate.render
 import com.begoml.archkit.viewstate.viewStateWatcher
 import com.begoml.app.presentation.loginmvi.LoginMviViewModel.*
 import com.begoml.app.tools.navigateSafe
+import com.begoml.archkit.viewstate.collectEvent
 import javax.inject.Inject
 
-class LoginMviFragment : Fragment(R.layout.fragment_login_mvvm) {
+class LoginMviFragment : androidx.fragment.app.Fragment(R.layout.fragment_login_mvvm) {
 
     @Inject
     lateinit var factory: LoginMviFactory
@@ -26,7 +25,6 @@ class LoginMviFragment : Fragment(R.layout.fragment_login_mvvm) {
     private val binding by viewBinding(FragmentLoginMvvmBinding::bind)
 
     private val watcher = viewStateWatcher<ViewState> {
-
         ViewState::isLoading {
             binding.progressBar.isVisible = it
         }
